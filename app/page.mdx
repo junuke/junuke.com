@@ -1,31 +1,297 @@
-# John Smith
+<div className="grid grid-cols-12 mt-5">
+  <div className="col-span-12 md:col-span-6 md:text-right text-center">
+    <img
+      src="/profile.jpeg"
+      alt="Junuk Jung"
+      className="w-60 h-60 rounded-full inline-block object-cover"
+    />
+  </div>
+  <div className="col-span-12 md:col-span-6 md:pt-10 md:pl-5 md:text-left text-center pt-5">
+    <div className="text-[34px] font-normal leading-tight">Junuk Jung</div>
+    <div className="font-normal italic text-[#999] text-[18px] mt-[5px] mb-[10px] md:max-w-[300px]">
+      AI Research Engineer — On-Device AI · Speech · NLP · CV
+    </div>
+    <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-1 text-[14px] text-[#666] dark:text-zinc-400">
+      <a
+        href="https://github.com/junuke"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 hover:text-black dark:hover:text-white"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden>
+          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.1.79-.25.79-.55 0-.27-.01-.99-.02-1.95-3.2.69-3.87-1.54-3.87-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.24.72-1.53-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18.92-.26 1.92-.39 2.91-.39s1.99.13 2.91.39c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.07.78 2.16 0 1.56-.01 2.81-.01 3.19 0 .3.2.66.8.55C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z" />
+        </svg>
+        {'junuke'}
+      </a>
+      <a
+        href="mailto:rnans33@gmail.com"
+        className="inline-flex items-center gap-1.5 hover:text-black dark:hover:text-white"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m3 7 9 6 9-6" />
+        </svg>
+        {'rnans33@gmail.com'}
+      </a>
+    </div>
+  </div>
+</div>
 
-<br />
+<Section>About Me</Section>
 
-This is my portfolio, blog, and personal website.
+공상하길 좋아하는 AI Research Engineer 입니다. 
 
-## Examples
+AI 도메인 지식에 떠오르는 아이디어를 접목해서 속도감 있게 연구하는 것을 좋아합니다. 
 
-- [5 Tiny CLI Tricks You (Probably) Didn’t Know](/n/1)
-- [6 Sneaky JavaScript Patterns to Cut Boilerplate](/n/2)
-- [6 CSS Patterns to Cut Boilerplate](/n/3)
+고객의 마음이 동하는 제품을 만들기 위해 performance · latency · memory 모두 만족시키기 위해 노력합니다. 
 
-## Features
+<Section>Work Experience</Section>
 
-- Syntax highlighting
-- Light/dark mode
-- Sitemap support
-- Fully customizable
-- Optional redirects
-- Write in Markdown / MDX
+<Timeline>
+<TimelineItem date="2023.12 - Present" company="ENERZAI" position="AI Research Engineer" dateInline={true}>
+QAT/PTQ를 통해 edge-device에 들어갈 다양한 model과 inference engine (Pytorch, c++/NDK) 을 개발합니다. 
 
-## Stack
+<Project
+  title="Bit-1.58 Automatic Speech Recognition"
+  methods={["B1.58-QAT", "Streaming-ASR", "NPU-CPU heterogeneous computing"]}
+  category="On-device Streaming ASR engine · Live streaming · Multi-turn function calling (STT → LLM → TTS)"
+  skills={["Python", "PyTorch"]}
+  variant="card"
+  media={<VideoCarousel videos={[{ id: "9Fa6JRqz4Hs" }, { id: "mMrBRUsuq_o" }, { id: "4sHLlT7FbNE" }]} />}
+  mediaCaption="On-device streaming ASR"
+>
 
-- Next.js / React
-- Tailwind CSS
-- TypeScript
-- Vercel
++ **B1.58-QAT:** whisper-small.en을 ternary weight \[-1, 0, 1\] QAT (Quantization Aware Training) 하여 google/fleurs에서 FP16 6.00% → B1.58 6.38%로 WER 증감을 0.38%p 이내로 억제하였습니다.
+자체 개발한 optimium에서 동작시 Synaptics VS680 full-CPU에서 150MB이하 peak memory로 input 9s → output 6.9s 수준의 추론 성능을 확보했습니다. 
+이는 동일 보드에서 FP16 대비 4× 이상 적은 메모리, 2× 이상 빠른 속도입니다.
 
-## Code
++ **Streaming-ASR:** whisper-small.en에서 streaming ASR을 지원하기 위해 모델 학습부터 kv-cache 관리, read/write policy를 포함한 inference engine까지 end-to-end로 개발하였습니다.
+B1.58 6.38% → B1.58-streaming 7.28%로 WER 증감 0.9%p가 발생하나, 이제 30s 입력을 기다리지 않고 매 입력 1s chunks 마다 outputs을 내뱉습니다.
+Synaptics VS680에서 1s chunk당 570ms (RTF 0.57)의 처리 시간으로 실시간 전사가 가능합니다.  
 
-- [next-mdx-blog](https://github.com/leerob/next-mdx-blog)
++ **NPU-CPU:** Synaptics VS680에서 whisper-streaming을 Full-CPU → NPU-CPU heterogeneous computing 환경으로 이식 시, 
+벤더 제공 NPU 블록 수정이 불가하여 발생한 WER 증감 (13.77%) 문제를 주변부 layer 재설계로 해결하여 WER 7.41% 까지 복원했으며, full-CPU 대비 추론 속도를 약 1.4× 향상시켰습니다.
+
+- **Live-streaming:**
+끊임없는 동영상 스트리밍을 가정한 endless-pipeline에 대한 reference implemenation을 개발하였습니다. 긴 전사 과정에서 cache에 담겨있는 
+audio와 token간 align이 조금씩 틀어지며 cache reset 시점 이후 과도하게 생략되는 부분을 학습 및 policy 수정으로 해결하여 long-form YouTube videos에서 14.05% → 11.92% WER 개선을 달성했습니다.
+
+- **Voice-contral:** 기존 성능을 유지하며 특수한 도메인 고유명사에 대한 finetuning, 마이크 노이즈와 주변부 소음에 강건하게 만들기 위한 augmentation 기법을 개발하였습니다.
+
+</Project>
+
+<Project
+  title="Bit-1.58 Live Translation"
+  methods={["B1.58-QAT", "SiMT", "Punctuation Restoration"]}
+  category="On-device SiMT engine · Deployed at Bouygues Telecom · 13 language pairs"
+  skills={["Python", "PyTorch"]}
+  variant="card"
+  media={<YouTube id="0u327q5aTMY" />}
+  mediaCaption="Real-time on-device live translation"
+>
+ 
++ **B1.58-QAT-SiMT:** SiMT(simultaneous machine translation)용 B1.58-QAT 학습부터 streaming kv-cache 관리, read/write policy를 포함한 live-translation용 inference engine까지 
+end-to-end로 개발하였습니다. 
+Long-form YouTube videos에서 partial chunk 입력에 대한 평균 XCOMET-XXL score 0.8642, AL (Average Lagging) 4.24를 달성하였습니다.
+Synaptics VS680에서 peak memory ≤50MB · 1-thread, 38 source tokens 평균 600–800ms를 달성하였습니다.
++ **PR (Punctuation Restoration):** STT에서 간혹 구두점이 빠져서 출력되는 현상이나 일상 대화, 인터넷 메신저 채팅등 과 같이 구두점이 없는 source에서 모델이 큰 폭으로 성능이 하락되는 것을 발견하였습니다.
+따라서 모델 크기 증감 없이 구두점 복원과 번역을 동시에 수행하는 모델을 개발하였습니다. 
+그 결과 long-form YouTube 중 구두점이 올바르게 존재하는 영상에서 성능 유지, 구두점이 없는 영상에서 구두점 복원율 precision 0.9988, XCOMET-XXL 0.6581 → 0.9023 으로 크게 증가하였습니다. 
+
+</Project>
+
+<Project
+  title="2Bit LLM-PTQ Research"
+  methods={["2bit LLM-PTQ"]}
+  skills={["Python", "PyTorch"]}
+  variant="card"
+>
+
++ MobileLLM-600M 대상 2-bit uniform weight PTQ (Post Training Quantization) 파이프라인 설계·구현하였습니다. 
++ A100x1 40GB에서 약 3시간 40분 학습만으로 WikiText2 PPL 8.39(FP16) → 9.59(W2A16, g128) 로 열화 1.2 이내를 달성하였습니다.
+
+</Project>
+
+<Project
+  title="Function Calling System for TV Control"
+  category="On-device Function Calling engine · Deployed at LG U+"
+  methods={["Function Calling", "Intent/Slot"]}
+  skills={["Python", "PyTorch", "c/c++", "Llama.cpp", "Kotlin"]}
+  variant="card"
+>
+
++ TV 음성 제어를 위해 사용자 발화를 받아 intent/slot으로 변환하는 T5 encoder-decoder 기반 single turn function calling 모델을 개발하였습니다. 1500개의 TV제어 관련 발화어 & OOD (Out Of Vocabulary) 테스트에서 100% 정확도를 달성하였습니다.
++ Llama.cpp를 활용하여 T5 encoder-decoder 모델을 셋톱박스(LGU+ UHD4, ARM Cortex-A73)에 배포하고, JNI/NDK로 Android 데모 앱을 구현하였습니다. 
++ Llama.cpp 추론 엔진의 메모리 할당 로직을 직접 분석·패치해 소형 T5 모델의 온디바이스 추론 메모리를 약 40% 절감하여 peak memory 30MB 이하, 15.30 ms/token를 달성하였습니다.
+
+</Project>
+
+<Project
+  title="Deep Pre-Coding"
+  category="DPC engine · Deployed at CJ ENM"
+  methods={["Coding Artifact Reduction", "Deep Pre-Coding"]}
+  skills={["Python", "PyTorch", "c/c++", "FFmpeg"]}
+  media={<YouTube id="FzEumR1ZKmw" />}
+  mediaCaption="Left: original + YouTube codec, Right: DPC + YouTube codec"
+  variant="card"
+>
+
++ 기존 표준 코덱(H.264 등)을 수정하지 않고 전단에 적용 가능한 딥러닝 기반 영상 전처리 DPC (Deep Pre-Coding) 모델 개발하였습니다. VMAF 기준으로 동일 화질 평균 BD-rate −23% 달성하였으며
+YouTube 등 영상 플랫폼에서 VOD 업로드 시 재인코딩 · 압축 과정에서 발생하는 화질 열화를 방지합니다. 
++ TensorRT 활용하여 모델을 FFmpeg 커스텀 필터(C++/CUDA)에 통합, H.264 등 기보유 코덱과 연동되는 실시간 영상 처리 파이프라인 구축하였습니다. 
+DPC+H.264 end-to-end 처리 속도는 1080p 기준 약 70 FPS를 달성하여 30fps급 VOD 콘텐츠의 실시간 처리가 가능합니다. 
+(Intel Xeon Silver 4210R, RTX 3090 단일 GPU)
+
+</Project>
+
+</TimelineItem>
+
+<TimelineItem date="2022.12 - 2023.11" company="ARBEON" position="AI Research Engineer" dateInline={true}>
+눈 앞의 사물을 AR-SCAN 하기 위한 Unseen Object Detection 모델 개발 업무를 수행했습니다.
+
+<Project
+  title="Unseen Object Detection"
+  category="On-device AR object detection · Arbeon AR-SCAN"
+  methods={["Multi-modal Detection", "Class-agnostic Detection", "Points-based Detection", "On-device Optimization"]}
+  skills={["Python", "PyTorch", "CoreML", "ONNX", "TFLite"]}
+  media={<DemoVideo src="/demos/arbeon/demo.mp4" />}
+  mediaCaption="On-device detection of never-before-seen objects — Android · iOS · iOS + points"
+  mediaIcon="play"
+  variant="card"
+>
+
++ **Multi-modal Detection:** image-text pair 기반 class-agnostic object detection 모델을 자체 개발하여 자체 테스트셋에서 Top1 97~98%를 달성하였습니다.
+오픈소스 YOLOv8n(69.90%) 대비 +27%p, Google ML Kit(87.00%) 대비 +10%p 우위입니다.
+
++ **iOS 포팅·경량화:** coremltools로 모델을 포팅·경량화하여 iPhone 13 Pro에서 20ms · Top1 97.12%를 달성하였습니다.
+
++ **Android 초경량화:** PyTorch→ONNX→TFLite 파이프라인을 구축하고 uint8 quantization·NNAPI를 적용하여 추론 속도 400ms → 12ms(약 33×) 개선 및 발열 문제를 해결하였습니다.
+NNAPI가 지원하지 않는 multi-head attention의 BatchMatMul 제약은 모델 구조 재설계로 우회하였습니다.
+
++ **Points-based 고도화:** SAM의 point embedding에서 착안한 points 기반 모델·학습 전략을 개발하여 mAR50-95 0.7814, Top1 98.10%로 자체 SOTA를 갱신하였습니다.
+
++ **Top1 (R@1) 알고리즘:** 검출된 다수 객체 중 사용자가 증강하길 원하는 단일 객체를 반환하는 알고리즘을 설계하였습니다.
+
++ **배포:** iOS/Android 앱 데모를 구현하고 패키지 라이브러리를 배포하였습니다.
+
+</Project>
+
+</TimelineItem>
+</Timeline>
+
+<Section>Selected Publications</Section>
+
+<Publication
+  title="Unified Negative Pair Generation toward Well-discriminative Feature Space for Face Recognition"
+  titleUrl="https://arxiv.org/abs/2203.11593"
+  authors="J.U. Jung, S.H. Lee, H.S. Oh, Y.J. Park, J.C. Park, and S.B. Son"
+  me="J.U. Jung"
+  venue="British Machine Vision Conference (BMVC), 2022"
+  links={[
+    { label: "arXiv", url: "https://arxiv.org/abs/2203.11593" },
+    { label: "code", url: "https://github.com/junuke/UNPG" }
+  ]}
+/>
+
+<Publication
+  title="MixFace: Improving Face Verification with a Focus on Fine-grained Conditions"
+  titleUrl="https://onlinelibrary.wiley.com/doi/full/10.4218/etrij.2023-0167"
+  authors="J.U. Jung, S.B. Son, J.C. Park, Y.J. Park, S.H. Lee, and H.S. Oh"
+  me="J.U. Jung"
+  venue="Electronics and Telecommunications Journal (ETRI), 2024"
+  links={[ 
+    { label: "arXiv", url: "https://arxiv.org/abs/2111.01717" },
+  ]}
+/>
+
+<Section>Projects</Section>
+
+<ProjectShowcase
+  image="/projects/mlcc.png"
+  imageAlt="MLCC 적층 자동 검사 시스템"
+  reverse={false}
+  title="자가학습 기반 실시간 MLCC 적층 자동 검사 통합 시스템"
+  category="삼성기전 · ICT 바우처(과기정통부) · 2021.12–2022.08"
+  methods={["Object Detection", "Semantic Segmentation"]}
+  skills={["Python", "PyTorch"]}
+>
+
++ **목표:** 사람이 목시로 수행하던 MLCC(Multi-Layer Ceramic Capacitor) 적층 양·불 검사 공정을 자동화하는 통합 검사 시스템 개발.
+
++ **결과:** AI Developer로서 적층 검출 모델 · 적층 segmentation 모델 · 마진 검출 알고리즘을 개발하여 적층 이미지 → 최종 양·불 판정까지 end-to-end로 동작하는 시스템을 구축하였습니다.
+PM으로서 일정 관리를 담당하고 프론트엔드·백엔드 개발자와 협업하여 웹 프로토타입 시스템을 구현하였습니다.
+
++ **성과:** 제안서 목표 정확도 85% 대비 **최종 양·불 검출 98%**를 달성하였으며, 삼성전기 공장에서 검사 인원 보조용으로 시험 가동되었습니다.
+
++ **Papers:** [Lamination Alignment](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002856842) · [Stacked Alignment](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002884720)
+
+</ProjectShowcase>
+
+<ProjectShowcase
+  image="/projects/cctv-monitoring.png"
+  imageAlt="다중 CCTV 기반 감염병 대응 시스템"
+  reverse={true}
+  title="다중 CCTV 기반 감염병 대응 시스템"
+  category="KIST · 2021.04–2021.11"
+  methods={["3D Pedestrian Localization", "Social Distance", "Masked Face Detection", "Object Tracking"]}
+  skills={["Python", "PyTorch", "YOLOv5", "RetinaFace"]}
+>
+
++ **목표:** COVID-19 등 감염병 대응을 위해 마스크 착용 여부와 사회적 거리 측정을 통한 실시간 위험도 평가·방역대상 추적 시스템 개발.
+
++ **결과:** YOLOv5 + RetinaFace 기반 마스크 착용 탐지기를 개발하고, 자세 추정 기반 사회적 거리 측정 · 얼굴 마스크 검출 · 방역수칙 시각화를 통합한 프로토타입 데모를 구현하였습니다.
+
++ **성과:** 마스크 검출 성능을 baseline 대비 mAP 약 +2% 향상.
+
++ **Paper:** [Monitoring quarantine rules using vision technology](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002864253)
+
+</ProjectShowcase>
+
+<ProjectShowcase
+  image="/projects/satellite-eo.jpg"
+  imageAlt="위성 이미지 객체 검출 경진대회"
+  reverse={false}
+  title="위성 이미지 객체 검출 경진대회 1위 (방위사업청장상)"
+  category="국방과학연구소 · 방위사업청 · Dacon · 2020.08–2020.11"
+  methods={["Object Detection in Aerial Images"]}
+  skills={["Python", "PyTorch"]}
+>
+
++ **수상:** 위성 이미지 객체 검출 경진대회에서 **1위, 방위사업청장상**을 수상하였습니다.
+
++ **기여:** Patch 기반 multi-scale augmentation을 train·test에 모두 적용하고 FPN에 Libra R-CNN의 balanced feature pyramid를 추가하여 public score 2위에 기여하였습니다.
+당시 코드가 공개되지 않았던 paperswithcode COCO object detection 1위 모델 CBNet 백본을 직접 구현하여 public score **1위**를 달성하였습니다.
+
++ **Papers:** [Deep Ensemble Aerial Detection](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002782712) · [Uncertainty-based Aerial Detection](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002643994)
+
+</ProjectShowcase>
+
+<ProjectShowcase
+  image="/projects/kface.png"
+  imageAlt="한국인 얼굴인식 기술"
+  reverse={true}
+  title="한국인 얼굴인식 기술 개발"
+  category="라온솔루션 · 국가혁신클러스터사업(R&D) · 2019.01–2020.12"
+  methods={["Face Detection", "Face Recognition"]}
+  skills={["Python", "PyTorch", "Android"]}
+>
+
++ **목표:** 한국인 얼굴 검출기·인식기 및 Android 앱 데모 개발.
+
++ **결과:** AI-Hub 한국인 얼굴 인식 데이터셋을 사용해 MTCNN 기반 얼굴 검출기와 ResNet + ArcFace 기반 얼굴 인식기를 개발하였습니다.
+얼굴 검출 → 인식 후 사전에 갤러리에 저장된 얼굴과의 유사도로 동일인 여부를 판단하는 Android 앱 데모를 구현하였습니다.
+
+</ProjectShowcase>
+
+<Section>Education</Section>
+
+<Timeline>
+<TimelineItem date="2020.09-2022.09" company="한국기술교육대학교 (KOREATECH)" position="M.S. 컴퓨터공학과" dateInline={true}>
+
+[DICE Lab](https://www.dicelab.kr/) · Prof. Heung-Seon Oh
+
+</TimelineItem>
+
+<TimelineItem date="2013.03-2020.08" company="한국기술교육대학교 (KOREATECH)" position="B.S. 컴퓨터공학부" dateInline={true} />
+</Timeline>
+

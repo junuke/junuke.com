@@ -35,3 +35,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large raw media sources (keep converted .mp4/.webm only)
+*.gif
+public/demos/**/*.gif

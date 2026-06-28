@@ -1,0 +1,137 @@
+%==============================================================
+%  Junuk Jung — Resume  (Overleaf / pdfLaTeX ready, ~2 pages)
+%  Compiler: pdfLaTeX.
+%==============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[margin=1.45cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fontawesome5}  % header icons. If unavailable on your Overleaf, delete this line
+                           % and the \faEnvelope/\faGithub/\faGlobe macros below.
+
+\definecolor{accent}{HTML}{5B21B6}
+\definecolor{muted}{HTML}{555555}
+\hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
+
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+
+\setlist[itemize]{leftmargin=1.2em, itemsep=0pt, topsep=1pt, parsep=0pt}
+\setlength{\parindent}{0pt}
+\linespread{0.99}
+
+% role/org line with right-aligned date
+\newcommand{\entry}[3]{\textbf{#1}\hfill{\color{muted}#2}\\ \textit{#3}\par\vspace{1pt}}
+% bold project title with right-aligned note + accent tag line
+\newcommand{\proj}[3]{\vspace{2pt}\textbf{#1}\hfill{\color{muted}\small #2}\\{\color{accent}\small #3}\par}
+
+\begin{document}
+
+% ---------------- Header ----------------
+\begin{center}
+  {\Huge\bfseries Junuk Jung}\\[3pt]
+  {\color{muted}\small AI Research Engineer \,---\, On-Device AI $\cdot$ Speech $\cdot$ NLP $\cdot$ Computer Vision}\\[4pt]
+  {\small
+  \faEnvelope[regular]~\href{mailto:rnans33@gmail.com}{rnans33@gmail.com} \quad
+  \faGithub~\href{https://github.com/junuke}{github.com/junuke} \quad
+  \faGlobe~\href{https://junuke.com}{junuke.com}}
+\end{center}
+
+% ---------------- Summary ----------------
+\section{Summary}
+AI Research Engineer who enjoys fast-paced research---turning ideas backed by domain knowledge into
+real products. Focused on on-device / edge AI, jointly optimizing \textbf{accuracy, latency, and memory}.
+
+% ---------------- Experience ----------------
+\section{Work Experience}
+
+\entry{ENERZAI}{Dec 2023 -- Present}{AI Research Engineer}
+{\small Optimize edge-deployable models and inference engines (PyTorch, C++/NDK) via quantization (QAT/PTQ).}
+
+\proj{Bit-1.58 Automatic Speech Recognition}{On-device streaming ASR}{B1.58-QAT $\cdot$ Streaming-ASR $\cdot$ NPU--CPU heterogeneous computing}
+\begin{itemize}
+  \item Ternary-weight $[-1,0,1]$ QAT on whisper-small.en: WER drift $\leq$0.38\%p (6.00\% $\to$ 6.38\%, fleurs),
+  $<$150MB peak on Synaptics VS680 ($\sim$4$\times$ less memory, 2$\times$ faster vs.\ FP16).
+  \item Built streaming ASR end-to-end (KV-cache, read/write policy, engine): 570ms/1s-chunk (RTF 0.57);
+  ported full-CPU $\to$ NPU--CPU, recovering WER 13.77\% $\to$ 7.41\% with $\sim$1.4$\times$ speedup.
+\end{itemize}
+
+\proj{Bit-1.58 Live Translation}{Deployed at Bouygues Telecom $\cdot$ 13 language pairs}{B1.58-QAT $\cdot$ SiMT $\cdot$ Punctuation Restoration}
+\begin{itemize}
+  \item On-device SiMT engine end-to-end: XCOMET-XXL 0.8642, AL 4.24, $\leq$50MB peak, 600--800ms/38 tokens (1-thread).
+  \item Joint punctuation restoration (no size increase): on unpunctuated input, XCOMET-XXL 0.6581 $\to$ 0.9023.
+\end{itemize}
+
+\proj{2-Bit LLM PTQ (Research)}{}{2-bit LLM-PTQ}
+\begin{itemize}
+  \item 2-bit uniform-weight PTQ for MobileLLM-600M: WikiText2 PPL 8.39 $\to$ 9.59 (W2A16, g128) in $\sim$3h40m on one A100.
+\end{itemize}
+
+\proj{Function Calling System for TV Control}{Deployed at LG U+}{Function Calling $\cdot$ Intent/Slot $\cdot$ JNI/NDK}
+\begin{itemize}
+  \item T5 single-turn function-calling model (intent/slot), 100\% on 1,500 utterances \& OOD; deployed via
+  llama.cpp to a set-top box (ARM Cortex-A73) with JNI/NDK demo; patched allocator $-$40\% memory ($<$30MB, 15.30 ms/tok).
+\end{itemize}
+
+\proj{Deep Pre-Coding}{Deployed at CJ ENM}{Deep Pre-Coding $\cdot$ Coding Artifact Reduction}
+\begin{itemize}
+  \item DL video pre-processing before standard codecs: $-$23\% BD-rate at equal VMAF; FFmpeg filter (C++/CUDA, TensorRT)
+  runs $\sim$70 FPS @ 1080p (single RTX 3090), enabling real-time VOD.
+\end{itemize}
+
+\vspace{3pt}
+\entry{ARBEON}{Dec 2022 -- Nov 2023}{AI Research Engineer}
+{\small Unseen Object Detection for AR-SCAN.}
+\proj{Unseen (Class-agnostic) Object Detection}{On-device AR object detection}{Multi-modal $\cdot$ Class-agnostic $\cdot$ Points-based $\cdot$ On-device}
+\begin{itemize}
+  \item Image--text class-agnostic detector: Top-1 97--98\% ($+$27\%p vs.\ YOLOv8n, $+$10\%p vs.\ Google ML Kit).
+  \item iOS (coremltools) 20ms/Top-1 97.12\%; Android (ONNX$\to$TFLite, uint8+NNAPI) 400ms $\to$ 12ms ($\sim$33$\times$);
+  points-based model (SAM-inspired) mAR50-95 0.7814, Top-1 98.10\% (in-house SOTA). Shipped iOS/Android demos + library.
+\end{itemize}
+
+% ---------------- Publications ----------------
+\section{Selected Publications}
+\textbf{\href{https://arxiv.org/abs/2203.11593}{Unified Negative Pair Generation toward Well-discriminative Feature Space for Face Recognition}}\\
+{\color{muted}\small \textbf{J.U. Jung}, S.H. Lee, H.S. Oh, Y.J. Park, J.C. Park, S.B. Son ~$\cdot$~ BMVC 2022 ~\textbar~
+\href{https://arxiv.org/abs/2203.11593}{arXiv}, \href{https://github.com/junuke/UNPG}{code}}\par\vspace{3pt}
+\textbf{\href{https://onlinelibrary.wiley.com/doi/full/10.4218/etrij.2023-0167}{MixFace: Improving Face Verification with a Focus on Fine-grained Conditions}}\\
+{\color{muted}\small \textbf{J.U. Jung}, S.B. Son, J.C. Park, Y.J. Park, S.H. Lee, H.S. Oh ~$\cdot$~ ETRI Journal 2024 ~\textbar~
+\href{https://arxiv.org/abs/2111.01717}{arXiv}}
+
+% ---------------- Projects ----------------
+\section{Projects}
+\entry{Real-time MLCC Stacking Inspection System}{2021.12 -- 2022.08}{Samsung Electro-Mechanics $\cdot$ ICT Voucher (MSIT)}
+\begin{itemize}
+  \item End-to-end pass/fail inspection (detection + segmentation + margin algo): \textbf{98\%} acc.\ vs.\ 85\% target,
+  field-tested at a Samsung factory; also served as PM. {\small[\href{https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002856842}{paper 1}, \href{https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002884720}{paper 2}]}
+\end{itemize}
+\entry{Multi-CCTV Infectious-Disease Response System}{2021.04 -- 2021.11}{KIST}
+\begin{itemize}
+  \item YOLOv5 + RetinaFace mask detector with pose-based social-distance estimation; $+$2\% mAP over baseline.
+  {\small[\href{https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002864253}{paper}]}
+\end{itemize}
+\entry{Satellite Image Object Detection Challenge --- 1st Place}{2020.08 -- 2020.11}{ADD $\cdot$ DAPA $\cdot$ Dacon}
+\begin{itemize}
+  \item \textbf{1st place} (Minister of DAPA Award); implemented the then-unreleased CBNet backbone + balanced FPN
+  with patch multi-scale augmentation. {\small[\href{https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002782712}{paper 1}, \href{https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002643994}{paper 2}]}
+\end{itemize}
+\entry{Korean Face Recognition}{2019.01 -- 2020.12}{Raon Solution $\cdot$ National Innovation Cluster (R\&D)}
+\begin{itemize}
+  \item MTCNN detector + ResNet/ArcFace recognizer on AI-Hub Korean face data, with an Android demo app.
+\end{itemize}
+
+% ---------------- Education ----------------
+\section{Education}
+\entry{Korea Univ.\ of Technology \& Education (KOREATECH)}{Sep 2020 -- Sep 2022}{M.S.\ in Computer Engineering ~---~ DICE Lab (Prof.\ Heung-Seon Oh)}
+\vspace{2pt}
+\entry{Korea Univ.\ of Technology \& Education (KOREATECH)}{Mar 2013 -- Aug 2020}{B.S.\ in Computer Engineering}
+
+% ---------------- Skills ----------------
+\section{Skills}
+\textbf{Languages:} Python, C/C++, Kotlin ~~\textbf{ML/Inference:} PyTorch, llama.cpp, TensorRT, ONNX, TFLite, CoreML, FFmpeg\\
+\textbf{Focus:} On-device / Edge AI, Quantization (QAT/PTQ), Speech (ASR/SiMT), NLP, Computer Vision
+
+\end{document}
