@@ -300,7 +300,7 @@ const components = {
             )}
           </div>
         )}
-        <div className="text-[15px] leading-snug space-y-3 text-justify hyphens-auto break-keep mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:marker:text-violet-400 dark:[&_ul]:marker:text-violet-500">
+        <div className="text-[15px] leading-snug space-y-3 text-justify hyphens-auto break-keep mt-4 [&_strong]:font-bold [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:marker:text-violet-400 dark:[&_ul]:marker:text-violet-500">
           {children}
         </div>
       </div>
